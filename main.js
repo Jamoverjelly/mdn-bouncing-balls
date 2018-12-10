@@ -13,3 +13,21 @@ function random(min,max) {
   const num = Math.floor(Math.random()*(max-min)) + min;
   return num;
 }
+
+// create constructor function for our balls
+function Ball(x, y, velX, velY, color, size) {
+  this.x = x;
+  this.y = y;
+  this.velX = velX;
+  this.velY = velY;
+  this.color = color;
+  this.size = size;
+}
+
+// Adding the draw method to the Ball's prototype
+Ball.prototype.draw = () => {
+  ctx.beginPath();
+  ctx.fillStyle = this.color;
+  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+  ctx.fill();
+}
