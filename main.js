@@ -53,6 +53,21 @@ Ball.prototype.update = function() {
   this.y += this.velY;
 }
 
+// adding collision detection
+Ball.prototype.collisionDetect = function() {
+  for (let j = 0; j < balls.length; j++) {
+    if (!(this === balls[j])) {
+      let dx = this.x - balls[j].x;
+      let dy = this.y - balls[j].y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < this.size + balls[j].size) {
+        balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) +')';
+      }
+    }
+  }
+}
+
 // balls container
 const balls = [];
 
@@ -79,6 +94,7 @@ function loop () {
   for (let i = 0; i < balls.length; i++) {
     balls[i].draw();
     balls[i].update();
+    balls[i].collisionDetect();
   }
 
   requestAnimationFrame(loop);
